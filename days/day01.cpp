@@ -153,7 +153,6 @@ Once again consider your left and right lists. What is their similarity score?
 void day01::Part2()
 {
 	std::vector<int> col1;
-	std::vector<int> col2;
 	std::unordered_map<int, int> occurrence_map;
 	int sum = 0;
 
@@ -168,21 +167,14 @@ void day01::Part2()
 		return;
 	}
 
-	std::string delimiter = "   ";
-	auto delimiterLength = delimiter.length();
-
 	std::string line;
-	while (std::getline(input, line))
+	int num1, num2;
+	while (input >> num1 >> num2)
 	{
-		auto delimiterPos = line.find(delimiter);
-		col1.emplace_back(std::stoi(line.substr(0, delimiterPos)));
-		col2.emplace_back(std::stoi(line.substr(delimiterPos + delimiterLength, line.length())));
+		col1.emplace_back(num1);
+		occurrence_map[num2]++;
 	}
 
-	for (auto number: col2)
-	{
-		occurrence_map[number]++;
-	}
 	for (auto number: col1)
 	{
 		sum += number * occurrence_map[number];
