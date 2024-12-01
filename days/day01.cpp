@@ -4,8 +4,12 @@
 
 #include "day01.h"
 
+#include <fstream>
 #include <iostream>
+#include <list>
 #include <ostream>
+#include <bits/fs_fwd.h>
+#include <bits/fs_path.h>
 
 /*
 --- Day 1: Historian Hysteria ---
@@ -71,5 +75,28 @@ Your actual left and right lists contain many location IDs. What is the total di
 
 void day01::Run()
 {
-	std::cout << "Day 01" << std::endl;
+	std::list<int> col1;
+	std::list<int> col2;
+
+	// std::ifstream input("input/day01.txt");
+	std::ifstream input("input/day01short.txt");
+
+	if (!input)
+	{
+		std::cerr << "Failed to open input file." << std::endl;
+		std::cout << "Current path is " << std::filesystem::current_path() << '\n';
+
+		return;
+	}
+
+	std::string delimiter = "   ";
+	auto delimiterLength = delimiter.length();
+
+	std::string line;
+	while (std::getline(input, line))
+	{
+		auto delimiterPos = line.find(delimiter);
+		std::string firstNumber = line.substr(0, delimiterPos);
+		std::string secondNumber = line.substr(delimiterPos + delimiterLength, line.length());
+	}
 }
