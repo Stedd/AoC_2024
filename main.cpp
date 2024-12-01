@@ -4,6 +4,5 @@
 
 int main()
 {
-day01 day01;
-	day01.Run();
+	day01::Run();
 }
