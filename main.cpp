@@ -22,5 +22,8 @@ int main()
 		}
 	}
 	const double average = totalTime / cycles;
-	std::cout << "Execution time avg: " << average * 1e6 << " μs. Lowest: " << lowest * 1e6 << " μs" << std::endl;
+	std::cout << "Ran " << cycles << " cycles. "
+			<< "Execution time avg: " << average * 1e6 << " μs. Lowest: "
+			<< lowest
+			* 1e6 << " μs" << std::endl;
 }
