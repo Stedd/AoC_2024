@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iostream>
 #include <ostream>
+#include <unordered_map>
 #include <vector>
 #include <bits/fs_fwd.h>
 #include <bits/fs_path.h>
@@ -153,6 +154,7 @@ void day01::Part2()
 {
 	std::vector<int> col1;
 	std::vector<int> col2;
+	std::unordered_map<int, int> occurrence_map;
 	int sum = 0;
 
 	std::ifstream input("input/day01.txt");
@@ -176,4 +178,21 @@ void day01::Part2()
 		col1.emplace_back(std::stoi(line.substr(0, delimiterPos)));
 		col2.emplace_back(std::stoi(line.substr(delimiterPos + delimiterLength, line.length())));
 	}
+
+	for (auto number: col2)
+	{
+		if (occurrence_map.contains(number))
+		{
+			occurrence_map[number]++;
+		} else
+		{
+			occurrence_map[number] = 1;
+		}
+	}
+
+	for (auto number: col1)
+	{
+		sum += number * occurrence_map[number];
+	}
+	printf("Sum of all occurrence pairs is: %d\n", sum);
 }
