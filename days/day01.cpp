@@ -77,6 +77,7 @@ void day01::Run()
 {
 	std::list<int> col1;
 	std::list<int> col2;
+	int sum = 0;
 
 	// std::ifstream input("input/day01.txt");
 	std::ifstream input("input/day01short.txt");
@@ -96,7 +97,16 @@ void day01::Run()
 	while (std::getline(input, line))
 	{
 		auto delimiterPos = line.find(delimiter);
-		std::string firstNumber = line.substr(0, delimiterPos);
-		std::string secondNumber = line.substr(delimiterPos + delimiterLength, line.length());
+		col1.emplace_back(std::stoi(line.substr(0, delimiterPos)));
+		col2.emplace_back(std::stoi(line.substr(delimiterPos + delimiterLength, line.length())));
+	}
+
+	col1.sort();
+	col2.sort();
+
+
+	for (int i = 0; i < col1.size(); ++i)
+	{
+		sum+= col1[i]-col2[i];
 	}
 }
