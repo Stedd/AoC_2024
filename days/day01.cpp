@@ -6,8 +6,8 @@
 
 #include <fstream>
 #include <iostream>
-#include <list>
 #include <ostream>
+#include <vector>
 #include <bits/fs_fwd.h>
 #include <bits/fs_path.h>
 
@@ -75,8 +75,8 @@ Your actual left and right lists contain many location IDs. What is the total di
 
 void day01::Run()
 {
-	std::list<int> col1;
-	std::list<int> col2;
+	std::vector<int> col1;
+	std::vector<int> col2;
 	int sum = 0;
 
 	// std::ifstream input("input/day01.txt");
@@ -101,8 +101,8 @@ void day01::Run()
 		col2.emplace_back(std::stoi(line.substr(delimiterPos + delimiterLength, line.length())));
 	}
 
-	col1.sort();
-	col2.sort();
+	std::sort(col1.begin(), col1.end());
+	std::sort(col2.begin(), col2.end());
 
 
 	for (int i = 0; i < col1.size(); ++i)
