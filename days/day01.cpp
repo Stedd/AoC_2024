@@ -187,5 +187,5 @@ void day01::Part2()
 	{
 		sum += number * occurrence_map[number];
 	}
-	printf("Sum of all occurrence pairs is: %d\n", sum);
+	//printf("Sum of all occurrence pairs is: %d\n", sum);
 }
