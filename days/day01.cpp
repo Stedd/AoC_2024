@@ -181,15 +181,8 @@ void day01::Part2()
 
 	for (auto number: col2)
 	{
-		if (occurrence_map.contains(number))
-		{
-			occurrence_map[number]++;
-		} else
-		{
-			occurrence_map[number] = 1;
-		}
+		occurrence_map[number]++;
 	}
-
 	for (auto number: col1)
 	{
 		sum += number * occurrence_map[number];
