@@ -107,6 +107,6 @@ void day01::Run()
 
 	for (int i = 0; i < col1.size(); ++i)
 	{
-		sum+= col1[i]-col2[i];
+		sum += std::abs(col1[i] - col2[i]);
 	}
 }
