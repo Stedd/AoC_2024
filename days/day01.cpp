@@ -73,14 +73,14 @@ you found. In the example above, this is 2 + 1 + 0 + 1 + 2 + 5, a total distance
 Your actual left and right lists contain many location IDs. What is the total distance between your lists?
 */
 
-void day01::Run()
+void day01::Part1()
 {
 	std::vector<int> col1;
 	std::vector<int> col2;
 	int sum = 0;
 
-	std::ifstream input("input/day01.txt");
-	//std::ifstream input("input/day01short.txt");
+	// std::ifstream input("input/day01.txt");
+	std::ifstream input("input/day01short.txt");
 
 	if (!input)
 	{

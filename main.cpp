@@ -6,7 +6,7 @@
 int main()
 {
 	const auto startTime = std::chrono::high_resolution_clock::now();
-	day01::Run();
+	day01::Part2();
 	const auto endTime = std::chrono::high_resolution_clock::now();
 	const std::chrono::duration<double> diff = endTime - startTime;
 	std::cout << "Execution time: " << diff.count() * 1e6 << " μs" << std::endl;

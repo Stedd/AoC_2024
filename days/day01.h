@@ -9,7 +9,8 @@
 class day01
 {
 public:
-	static void Run();
+	static void Part1();
+	static void Part2();
 };
 
 
