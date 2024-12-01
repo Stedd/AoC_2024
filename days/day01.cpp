@@ -72,46 +72,7 @@ To find the total distance between the left list and the right list, add up the 
 you found. In the example above, this is 2 + 1 + 0 + 1 + 2 + 5, a total distance of 11!
 
 Your actual left and right lists contain many location IDs. What is the total distance between your lists?
-*/
 
-void day01::Part1()
-{
-	std::vector<int> col1;
-	std::vector<int> col2;
-	int sum = 0;
-
-	std::ifstream input("input/day01.txt");
-
-	if (!input)
-	{
-		std::cerr << "Failed to open input file." << std::endl;
-		std::cout << "Current path is " << std::filesystem::current_path() << '\n';
-
-		return;
-	}
-
-	std::string delimiter = "   ";
-	auto delimiterLength = delimiter.length();
-
-	std::string line;
-	while (std::getline(input, line))
-	{
-		auto delimiterPos = line.find(delimiter);
-		col1.emplace_back(std::stoi(line.substr(0, delimiterPos)));
-		col2.emplace_back(std::stoi(line.substr(delimiterPos + delimiterLength, line.length())));
-	}
-
-	std::sort(col1.begin(), col1.end());
-	std::sort(col2.begin(), col2.end());
-
-
-	for (int i = 0; i < col1.size(); ++i)
-	{
-		sum += std::abs(col1[i] - col2[i]);
-	}
-}
-
-/*
 --- Part Two ---
 
 Your analysis only confirmed what everyone feared: the two lists of location IDs are indeed very different.
@@ -150,18 +111,20 @@ Once again consider your left and right lists. What is their similarity score?
 
  */
 
-void day01::Part2()
+void day01::Calculate()
 {
 	std::vector<int> col1;
+	std::vector<int> col2;
 	std::unordered_map<int, int> occurrence_map;
-	int sum = 0;
+	int totalDistance = 0;
+	int similarityScore = 0;
 
 	size_t estimated_size = 1000;
 	col1.reserve(estimated_size);
+	col2.reserve(estimated_size);
 	occurrence_map.reserve(estimated_size);
 
 	std::ifstream input("input/day01.txt");
-	//std::ifstream input("input/day01short.txt");
 
 	if (!input)
 	{
@@ -176,12 +139,23 @@ void day01::Part2()
 	while (input >> num1 >> num2)
 	{
 		col1.emplace_back(num1);
+		col2.emplace_back(num2);
 		occurrence_map[num2]++;
 	}
 
-	for (auto number: col1)
+	std::sort(col1.begin(), col1.end());
+	std::sort(col2.begin(), col2.end());
+
+	for (size_t i = 0; i < col1.size(); i++)
 	{
-		sum += number * occurrence_map[number];
+		totalDistance += std::abs(col1[i] - col2[i]);
+		similarityScore += col1[i] * occurrence_map[col1[i]];
 	}
-	//printf("Sum of all occurrence pairs is: %d\n", sum);
+
+	printf("Total distance: %d\n", totalDistance);
+	printf("Similarity score: %d\n", similarityScore);
 }
+
+//Correct answers:
+//part1: 1889772
+//part2: 23228917

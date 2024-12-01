@@ -7,11 +7,12 @@ int main()
 {
 	double lowest = 10000;
 	double totalTime = 0;
-	constexpr int cycles = 10000;
+	constexpr int cycles = 1;
+	//constexpr int cycles = 10000;
 	for (int i = 1; i <= cycles; i++)
 	{
 		const auto startTime = std::chrono::high_resolution_clock::now();
-		day01::Part2();
+		day01::Calculate();
 		const auto endTime = std::chrono::high_resolution_clock::now();
 		const std::chrono::duration<double> diff = endTime - startTime;
 
