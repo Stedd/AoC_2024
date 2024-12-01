@@ -3,3 +3,11 @@
 //
 
 #include "day01.h"
+
+#include <iostream>
+#include <ostream>
+
+void day01::Run()
+{
+	std::cout << "Day 01" << std::endl;
+}

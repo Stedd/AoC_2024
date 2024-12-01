@@ -1,7 +1,9 @@
 #include <iostream>
 
+#include "days/day01.h"
+
 int main()
 {
-	std::cout << "Hello, World!" << std::endl;
-	return 0;
+day01 day01;
+	day01.Run();
 }

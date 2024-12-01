@@ -6,11 +6,11 @@
 #define DAY01_H
 
 
-
-class day01 {
-
+class day01
+{
+public:
+	static void Run();
 };
-
 
 
 #endif //DAY01_H
