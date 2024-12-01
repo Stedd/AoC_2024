@@ -79,8 +79,7 @@ void day01::Part1()
 	std::vector<int> col2;
 	int sum = 0;
 
-	// std::ifstream input("input/day01.txt");
-	std::ifstream input("input/day01short.txt");
+	std::ifstream input("input/day01.txt");
 
 	if (!input)
 	{
