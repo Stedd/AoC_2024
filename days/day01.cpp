@@ -134,7 +134,6 @@ void day01::Calculate()
 		return;
 	}
 
-	std::string line;
 	int num1, num2;
 	while (input >> num1 >> num2)
 	{
