@@ -156,6 +156,10 @@ void day01::Part2()
 	std::unordered_map<int, int> occurrence_map;
 	int sum = 0;
 
+	size_t estimated_size = 1000;
+	col1.reserve(estimated_size);
+	occurrence_map.reserve(estimated_size);
+
 	std::ifstream input("input/day01.txt");
 	//std::ifstream input("input/day01short.txt");
 
