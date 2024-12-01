@@ -79,8 +79,8 @@ void day01::Run()
 	std::vector<int> col2;
 	int sum = 0;
 
-	// std::ifstream input("input/day01.txt");
-	std::ifstream input("input/day01short.txt");
+	std::ifstream input("input/day01.txt");
+	//std::ifstream input("input/day01short.txt");
 
 	if (!input)
 	{
@@ -109,4 +109,5 @@ void day01::Run()
 	{
 		sum += std::abs(col1[i] - col2[i]);
 	}
+	std::cout << sum << '\n';
 }
