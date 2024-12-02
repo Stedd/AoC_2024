@@ -6,6 +6,8 @@
 
 #include <fstream>
 #include <iostream>
+#include <iterator>
+#include <vector>
 #include <bits/fs_fwd.h>
 #include <bits/fs_path.h>
 
@@ -58,7 +60,7 @@ Analyze the unusual data from the engineers. How many reports are safe?
 
 void day02::Calculate()
 {
-
+	//std::ifstream input("input/day02short.txt");
 	std::ifstream input("input/day02.txt");
 
 	if (!input)
@@ -69,4 +71,71 @@ void day02::Calculate()
 		return;
 	}
 
+	//int num1, num2, num3, num4, num5, num6, num7, num8;
+
+	int safeReports = 0;
+	bool increasing, decreasing, safe;
+
+	//std::string line;
+	for (std::string line; std::getline(input, line, '\n');)
+	{
+		std::istringstream iss(line);
+		std::vector<int> numbers(std::istream_iterator<int>{iss}, std::istream_iterator<int>());
+		int previousNumber = numbers.at(0);
+		increasing = false;
+		decreasing = false;
+		safe = true;
+		for (int i = 1; i < numbers.size(); i++)
+		{
+			int currentNumber = numbers.at(i);
+			int diff = abs(currentNumber - previousNumber);
+
+			if (i == 1)
+			{
+				if (currentNumber > previousNumber)
+				{
+					increasing = true;
+				}
+				if (currentNumber < previousNumber)
+				{
+					decreasing = true;
+				}
+				if (currentNumber == previousNumber)
+				{
+					safe=false;
+					break;
+				}
+			} else
+			{
+				if (currentNumber < previousNumber && increasing)
+				{
+					safe=false;
+					break;
+				}
+				if (currentNumber > previousNumber && decreasing)
+				{
+					safe=false;
+					break;
+				}
+			}
+
+
+			if (diff < 1 || diff > 3)
+			{
+				safe=false;
+				break;
+			}
+
+			previousNumber = currentNumber;
+		}
+		if (safe)
+		{
+			safeReports++;
+		}
+	}
+	std::cout << safeReports << '\n';
+	// while (std::getline(input, line, '\n')  )
+	// {
+	// 	// printf("%d\n", num2);
+	// }
 }
