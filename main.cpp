@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "days/day01.h"
+#include "days/day02.h"
 
 int main()
 {
@@ -12,7 +13,7 @@ int main()
 	for (int i = 1; i <= cycles; i++)
 	{
 		const auto startTime = std::chrono::high_resolution_clock::now();
-		day01::Calculate();
+		day02::Calculate();
 		const auto endTime = std::chrono::high_resolution_clock::now();
 		const std::chrono::duration<double> diff = endTime - startTime;
 
