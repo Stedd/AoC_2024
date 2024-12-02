@@ -71,44 +71,10 @@ void day02::Calculate()
 		return;
 	}
 
-
 	int safeReports = 0;
-	bool increasing, decreasing, safe;
-
-	//std::string line;
 	for (std::string line; std::getline(input, line, '\n');)
 	{
-		std::istringstream iss(line);
-		std::vector<int> numbers(std::istream_iterator<int>{iss}, std::istream_iterator<int>());
-		int previousNumber = numbers.at(0);
-		increasing = false;
-		decreasing = false;
-		safe = true;
-		for (int i = 1; i < numbers.size(); i++)
-		{
-			int currentNumber = numbers.at(i);
-
-			if (i == 1)
-			{
-				if (currentNumber > previousNumber)
-				{
-					increasing = true;
-				}
-				if (currentNumber < previousNumber)
-				{
-					decreasing = true;
-				}
-			}
-
-			if (IsUnsafe(currentNumber, previousNumber, increasing, decreasing) == 1)
-			{
-				safe = false;
-				break;
-			}
-
-			previousNumber = currentNumber;
-		}
-		if (safe)
+		if (IsSafe(line))
 		{
 			safeReports++;
 		}
@@ -116,14 +82,65 @@ void day02::Calculate()
 	std::cout << safeReports << '\n';
 }
 
-int day02::IsUnsafe(const int current, const int previous, const bool increasing, const bool decreasing)
+bool day02::IsSafe(const std::string &line)
+{
+	std::istringstream iss(line);
+	std::vector<int> numbers(std::istream_iterator<int>{iss}, std::istream_iterator<int>());
+	int previousNumber = numbers.at(numbers.size() - 1);
+	bool increasing = false;
+	bool decreasing = false;
+	bool safe = true;
+	for (int i = numbers.size() - 2; i >= 0; i--)
+	{
+		const int currentNumber = numbers.at(i);
+
+		if (i == numbers.size() - 2)
+		{
+			if (previousNumber < currentNumber)
+			{
+				increasing = true;
+			}
+			if (previousNumber > currentNumber)
+			{
+				decreasing = true;
+			}
+		}
+
+		if (SafetyChecks(currentNumber, previousNumber, increasing, decreasing) == 1)
+		{
+			// numbers.erase(numbers.begin() + i);
+			// if (i + 1 < numbers.size())
+			// {
+			// 	previousNumber = numbers.at(i + 1);
+			// } else
+			// {
+			// 	printf("wtf do i do here?");
+			// }
+			// //currentNumber = numbers.at(i);
+			// if (SafetyChecks(currentNumber, previousNumber, increasing, decreasing) == 1)
+			// {
+			safe = false;
+			return false;
+			// }
+		}
+
+		previousNumber = currentNumber;
+	}
+	if (safe)
+	{
+		return true;
+	}
+	return false;
+}
+
+int day02::SafetyChecks(const int current, const int previous, const bool increasing, const bool decreasing)
 {
 	const int diff = abs(current - previous);
-	if (current < previous && increasing)
+	if (previous > current && increasing)
 	{
 		return 1;
 	}
-	if (current > previous && decreasing)
+	if (previous < current && decreasing)
 	{
 		return 1;
 	}
