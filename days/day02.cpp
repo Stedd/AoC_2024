@@ -60,8 +60,8 @@ Analyze the unusual data from the engineers. How many reports are safe?
 
 void day02::Calculate()
 {
-	//std::ifstream input("input/day02short.txt");
-	std::ifstream input("input/day02.txt");
+	std::ifstream input("input/day02short.txt");
+	//std::ifstream input("input/day02.txt");
 
 	if (!input)
 	{
