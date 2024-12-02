@@ -4,6 +4,11 @@
 
 #include "day02.h"
 
+#include <fstream>
+#include <iostream>
+#include <bits/fs_fwd.h>
+#include <bits/fs_path.h>
+
 /*
 --- Day 2: Red-Nosed Reports ---
 
@@ -53,5 +58,15 @@ Analyze the unusual data from the engineers. How many reports are safe?
 
 void day02::Calculate()
 {
+
+	std::ifstream input("input/day02.txt");
+
+	if (!input)
+	{
+		std::cerr << "Failed to open input file." << std::endl;
+		std::cout << "Current path is " << std::filesystem::current_path() << '\n';
+
+		return;
+	}
 
 }
