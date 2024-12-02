@@ -60,8 +60,8 @@ Analyze the unusual data from the engineers. How many reports are safe?
 
 void day02::Calculate()
 {
-	std::ifstream input("input/day02short.txt");
-	//std::ifstream input("input/day02.txt");
+	//std::ifstream input("input/day02short.txt");
+	std::ifstream input("input/day02.txt");
 
 	if (!input)
 	{
@@ -71,7 +71,6 @@ void day02::Calculate()
 		return;
 	}
 
-	//int num1, num2, num3, num4, num5, num6, num7, num8;
 
 	int safeReports = 0;
 	bool increasing, decreasing, safe;
@@ -88,7 +87,6 @@ void day02::Calculate()
 		for (int i = 1; i < numbers.size(); i++)
 		{
 			int currentNumber = numbers.at(i);
-			int diff = abs(currentNumber - previousNumber);
 
 			if (i == 1)
 			{
@@ -100,31 +98,32 @@ void day02::Calculate()
 				{
 					decreasing = true;
 				}
-				if (currentNumber == previousNumber)
-				{
-					safe=false;
-					break;
-				}
 			} else
 			{
-				if (currentNumber < previousNumber && increasing)
+				if (IsUnsafe(currentNumber, previousNumber, increasing, decreasing))
 				{
-					safe=false;
-					break;
-				}
-				if (currentNumber > previousNumber && decreasing)
-				{
-					safe=false;
-					break;
-				}
+					numbers.erase(numbers.begin() + i - 1);
+					i--;
+					previousNumber = numbers.at(i - 1);
+					currentNumber = numbers.at(i);
+
+					if (currentNumber > previousNumber)
+					{
+						increasing = true;
+					}
+					if (currentNumber < previousNumber)
+					{
+						decreasing = true;
+					}
+					if (IsUnsafe(currentNumber, previousNumber, increasing, decreasing))
+					{
+						// continue;
+						safe = false;
+						break;
+					}
+				};
 			}
 
-
-			if (diff < 1 || diff > 3)
-			{
-				safe=false;
-				break;
-			}
 
 			previousNumber = currentNumber;
 		}
@@ -134,8 +133,26 @@ void day02::Calculate()
 		}
 	}
 	std::cout << safeReports << '\n';
-	// while (std::getline(input, line, '\n')  )
-	// {
-	// 	// printf("%d\n", num2);
-	// }
+}
+
+bool day02::IsUnsafe(const int current, const int previous, const bool increasing, const bool decreasing)
+{
+	const int diff = abs(current - previous);
+	if (current < previous && increasing)
+	{
+		return true;
+	}
+	if (current > previous && decreasing)
+	{
+		return true;
+	}
+	if (current == previous)
+	{
+		return true;
+	}
+	if (diff < 1 || diff > 3)
+	{
+		return true;
+	}
+	return false;
 }
