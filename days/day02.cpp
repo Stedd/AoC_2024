@@ -98,30 +98,35 @@ void day02::Calculate()
 				{
 					decreasing = true;
 				}
-			} else
-			{
-				if (IsUnsafe(currentNumber, previousNumber, increasing, decreasing))
-				{
-					numbers.erase(numbers.begin() + i - 1);
-					i--;
-					previousNumber = numbers.at(i - 1);
-					currentNumber = numbers.at(i);
+			}
 
-					if (currentNumber > previousNumber)
-					{
-						increasing = true;
-					}
-					if (currentNumber < previousNumber)
-					{
-						decreasing = true;
-					}
-					if (IsUnsafe(currentNumber, previousNumber, increasing, decreasing))
-					{
-						// continue;
-						safe = false;
-						break;
-					}
-				};
+
+			if (IsUnsafe(currentNumber, previousNumber, increasing, decreasing) == 1)
+			{
+				numbers.erase(numbers.begin() + i);
+				if (i >= numbers.size())
+				{
+					i--;
+				}
+
+				previousNumber = numbers.at(i - 1);
+				currentNumber = numbers.at(i);
+
+
+				// if (currentNumber > previousNumber)
+				// {
+				// 	increasing = true;
+				// }
+				// if (currentNumber < previousNumber)
+				// {
+				// 	decreasing = true;
+				// }
+				if (IsUnsafe(currentNumber, previousNumber, increasing, decreasing) == 1)
+				{
+					// continue;
+					safe = false;
+					break;
+				}
 			}
 
 
@@ -135,24 +140,29 @@ void day02::Calculate()
 	std::cout << safeReports << '\n';
 }
 
-bool day02::IsUnsafe(const int current, const int previous, const bool increasing, const bool decreasing)
+int day02::IsUnsafe(const int current, const int previous, const bool increasing, const bool decreasing)
 {
 	const int diff = abs(current - previous);
 	if (current < previous && increasing)
 	{
-		return true;
+		//remove current
+		return 1;
 	}
 	if (current > previous && decreasing)
 	{
-		return true;
+		//remove current
+		return 1;
 	}
 	if (current == previous)
 	{
-		return true;
+		//remove current
+		return 1;
 	}
 	if (diff < 1 || diff > 3)
 	{
-		return true;
+		//remove current
+		return 1;
 	}
-	return false;
+	//safe
+	return 0;
 }

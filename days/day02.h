@@ -11,7 +11,7 @@ class day02
 public:
 	static void Calculate();
 
-	static bool IsUnsafe(int current, int previous, bool increasing, bool decreasing);
+	static int IsUnsafe(int current, int previous, bool increasing, bool decreasing);
 };
 
 #endif //DAY02_H
