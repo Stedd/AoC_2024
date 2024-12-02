@@ -4,7 +4,7 @@
 
 #ifndef DAY02_H
 #define DAY02_H
-#include <string>
+#include <vector>
 
 
 class day02
@@ -12,7 +12,7 @@ class day02
 public:
 	static void Calculate();
 
-	static bool IsSafe(const std::string &line);
+	static bool IsSafe(const std::vector<int>& numbers,bool secondPass);
 
 	static int SafetyChecks(int current, int previous, bool increasing, bool decreasing);
 };

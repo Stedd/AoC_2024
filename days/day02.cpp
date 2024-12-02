@@ -74,7 +74,9 @@ void day02::Calculate()
 	int safeReports = 0;
 	for (std::string line; std::getline(input, line, '\n');)
 	{
-		if (IsSafe(line))
+		std::istringstream iss(line);
+		std::vector numbers(std::istream_iterator<int>{iss}, std::istream_iterator<int>());
+		if (IsSafe(numbers, false))
 		{
 			safeReports++;
 		}
@@ -82,10 +84,8 @@ void day02::Calculate()
 	std::cout << safeReports << '\n';
 }
 
-bool day02::IsSafe(const std::string &line)
+bool day02::IsSafe(const std::vector<int> &numbers, const bool secondPass)
 {
-	std::istringstream iss(line);
-	std::vector<int> numbers(std::istream_iterator<int>{iss}, std::istream_iterator<int>());
 	int previousNumber = numbers.at(numbers.size() - 1);
 	bool increasing = false;
 	bool decreasing = false;
@@ -106,22 +106,14 @@ bool day02::IsSafe(const std::string &line)
 			}
 		}
 
-		if (SafetyChecks(currentNumber, previousNumber, increasing, decreasing) == 1)
+		if (SafetyChecks(currentNumber, previousNumber, increasing, decreasing) == 1 && !secondPass)
 		{
-			// numbers.erase(numbers.begin() + i);
-			// if (i + 1 < numbers.size())
-			// {
-			// 	previousNumber = numbers.at(i + 1);
-			// } else
-			// {
-			// 	printf("wtf do i do here?");
-			// }
-			// //currentNumber = numbers.at(i);
-			// if (SafetyChecks(currentNumber, previousNumber, increasing, decreasing) == 1)
-			// {
-			safe = false;
-			return false;
-			// }
+
+			if (IsSafe(numbers, true))
+			{
+				safe = false;
+				return false;
+			}
 		}
 
 		previousNumber = currentNumber;
