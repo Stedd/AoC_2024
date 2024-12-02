@@ -100,35 +100,11 @@ void day02::Calculate()
 				}
 			}
 
-
 			if (IsUnsafe(currentNumber, previousNumber, increasing, decreasing) == 1)
 			{
-				numbers.erase(numbers.begin() + i);
-				if (i >= numbers.size())
-				{
-					i--;
-				}
-
-				previousNumber = numbers.at(i - 1);
-				currentNumber = numbers.at(i);
-
-
-				// if (currentNumber > previousNumber)
-				// {
-				// 	increasing = true;
-				// }
-				// if (currentNumber < previousNumber)
-				// {
-				// 	decreasing = true;
-				// }
-				if (IsUnsafe(currentNumber, previousNumber, increasing, decreasing) == 1)
-				{
-					// continue;
-					safe = false;
-					break;
-				}
+				safe = false;
+				break;
 			}
-
 
 			previousNumber = currentNumber;
 		}
@@ -145,22 +121,18 @@ int day02::IsUnsafe(const int current, const int previous, const bool increasing
 	const int diff = abs(current - previous);
 	if (current < previous && increasing)
 	{
-		//remove current
 		return 1;
 	}
 	if (current > previous && decreasing)
 	{
-		//remove current
 		return 1;
 	}
 	if (current == previous)
 	{
-		//remove current
 		return 1;
 	}
 	if (diff < 1 || diff > 3)
 	{
-		//remove current
 		return 1;
 	}
 	//safe
